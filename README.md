@@ -72,7 +72,7 @@ Locking it down
 implementation to whatever you want. An Authorizer's only requirement is that it responds to `call(resource, action)` 
 and returns true or false depending on your authorization logic.
 
-The default authorizers inherit from `Lockdown::Authorizer`, which finds the correct authorizer based on the resource 
+The default authorizers inherit from `Lockdown::Authorizer`, who's `call` method finds the correct authorizer based on the resource 
 name and then calls `#{action}?` on it. The current record is accessible via `record`, and the current user via `user`. 
 Here is a simple example of an authorizer:
 
@@ -111,7 +111,7 @@ If you have a custom permission system or something like that, you can send in a
 ```
 class PostsController < ApplicationController
   preload
-  lockdown :post, YourImplementation.new
+  lockdown YourImplementation.new
 end
 ```
 
