@@ -6,12 +6,13 @@ describe 'loading the inferred resource from the database' do
 
   class Test
     def self.find(*); end
+    def self.find_by(*); end
     def self.all(*); end
   end
 
   context 'singular resource' do
     let(:params) do
-      { id: 1 }
+      { id: 1, name: 'test' }
     end
 
     it 'resolves to the Test with id 1' do
@@ -20,7 +21,9 @@ describe 'loading the inferred resource from the database' do
     end
 
     it 'resolves to the blocks value when a block is given' do
-
+      expect(Test).to_not receive(:find)
+      expect(Test).to receive(:find_by).with({ name: 'test' }) { :block }
+      expect(loader.resolve { Test.find_by(name: params[:name]) }).to eq(:block)
     end
   end
 
