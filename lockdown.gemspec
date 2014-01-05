@@ -6,11 +6,11 @@ require 'lockdown/version'
 Gem::Specification.new do |spec|
   spec.name          = "lockdown"
   spec.version       = Lockdown::VERSION
-  spec.authors       = ["TODO: Write your name"]
-  spec.email         = ["TODO: Write your email address"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.authors       = ["Logan Serman"]
+  spec.email         = ["loganserman@gmail.com"]
+  spec.description   = %q{Simple loading/authorization plugin for Ruby on Rails.}
+  spec.summary       = spec.description
+  spec.homepage      = "https://github.com/lserman/lockdown"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
