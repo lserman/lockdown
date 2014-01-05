@@ -7,7 +7,7 @@ require 'active_support/all'
 module Lockdown
   extend ActiveSupport::Concern
 
-  def preload(name, options, &block)
+  def preload(name, &block)
     loadable = Loadable.new(name, self)
     resource = Loader.new(loadable, self).resolve(&block)
     instance_variable_set "@#{loadable.getter}", resource
@@ -22,7 +22,7 @@ module Lockdown
 
     def preload(*name, &block)
       options = name.extract_options!
-      send(:before_action) { |controller| controller.preload(name.first, options, &block) }
+      send(:before_action) { |controller| controller.preload(name.first, &block) }
     end
 
     # def lockdown(authorizer = :infer)
