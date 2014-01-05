@@ -11,12 +11,12 @@ Installation
 Usage
 ========
 
-Like many libraries (CanCan, InheritedResources, etc...), Lockdown will preload your records in an instance variable so 
-that they can be authorized automatically in a before filter. To do this, Lockdown uses the `preload` method. Using 
-Lockdown's method is completely optional, you can instead use the common Rails practice of making a custom `set_whatever` 
+Like many libraries (CanCan, InheritedResources, etc...), Lockdown will preload your records in an instance variable so
+that they can be authorized automatically in a before filter. To do this, Lockdown uses the `preload` method. Using
+Lockdown's method is completely optional, you can instead use the common Rails practice of making a custom `set_whatever`
 filter if you wish.
 
-Lockdown uses 'Authorizers' (similar to Pundit policies) to authorize your resource. Also like Pundit, each Authorizer 
+Lockdown uses 'Authorizers' (similar to Pundit policies) to authorize your resource. Also like Pundit, each Authorizer
 responds to each controller method and returns true or false depending on your authorization logic.
 
 Preloading your resource
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
 end
 ```
 
-`preload` can also accept a block and use the return value as the resource. Passing a symbol into `preload` along with 
+`preload` can also accept a block and use the return value as the resource. Passing a symbol into `preload` along with
 the block will change the instance variable naming.
 
 ```
@@ -48,32 +48,17 @@ class UsersController < ApplicationController
   end
 ```
 
-You can also override the `_resource` method in your controller instead.
-
-```
-class UsersController < ApplicationController
-  preload # @user = resource
-  
-  private
-  
-    def _resource
-      Alien.find_by(name: params[:name])
-    end
-    
-end
-```
-
 Alternatively, you can use whatever finder you want as long as something is loaded before `lockdown`.
 
 Locking it down
 ========
 
-`lockdown` authorizes a resource by using an `Authorizer` class (by default), although you can change the 
-implementation to whatever you want. An Authorizer's only requirement is that it responds to `call(resource, action)` 
+`lockdown` authorizes a resource by using an `Authorizer` class (by default), although you can change the
+implementation to whatever you want. An Authorizer's only requirement is that it responds to `call(resource, action)`
 and returns true or false depending on your authorization logic.
 
-The default authorizers inherit from `Lockdown::Authorizer`, who's `call` method finds the correct authorizer based on the resource 
-name and then calls `#{action}?` on it. The current record is accessible via `record`, and the current user via `user`. 
+The default authorizers inherit from `Lockdown::Authorizer`, who's `call` method finds the correct authorizer based on the resource
+name and then calls `#{action}?` on it. The current record is accessible via `record`, and the current user via `user`.
 Here is a simple example of an authorizer:
 
 ```
@@ -105,7 +90,7 @@ class PostsController < ApplicationController
   end
 ```
 
-If you have a custom permission system or something like that, you can send in any class that responds to 
+If you have a custom permission system or something like that, you can send in any class that responds to
 `call(resource, action)`:
 
 ```
