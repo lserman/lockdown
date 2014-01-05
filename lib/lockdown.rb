@@ -9,7 +9,7 @@ module Lockdown
 
   def preload(name, options, &block)
     loadable = Loadable.new(name, self)
-    resource = Loader.new(loadable).resolve(&block)
+    resource = Loader.new(loadable, self).resolve(&block)
     instance_variable_set "@#{loadable.getter}", resource
   end
 
