@@ -7,7 +7,8 @@ require 'active_support/all'
 module Lockdown
   extend ActiveSupport::Concern
 
-  def preload(name, &block)
+  def preload(name = nil, &block)
+    name ||= controller_name.singularize
     loadable = Loadable.new(name, self)
     resource = Loader.new(loadable, self).resolve(&block)
     instance_variable_set "@#{loadable.getter}", resource

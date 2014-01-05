@@ -11,9 +11,7 @@ describe 'loading the inferred resource from the database' do
   end
 
   context 'singular resource' do
-    let(:params) do
-      { id: 1, name: 'test' }
-    end
+    let(:params) { { id: 1, name: 'test' } }
 
     it 'resolves to the Test with id 1' do
       expect(Test).to receive(:find) { :test }
